@@ -2,44 +2,25 @@
 
 File::File(QObject *parent) : QObject(parent)
 {
-    file.setFileName("list_of_participients.txt");
+    file.setFileName("list_of_participants.txt");
 }
 
-int File::countParticipants() // рабочий метод. возвращает количество строк из файла
+int File::countParticipants() //возвращает количество строк из файла
 {
-    int count= 0;
-    if ((file.exists())&&(file.open(QIODevice::ReadOnly)))
+    if (listOfParticipants.empty())
     {
-        while(!file.atEnd())
+        if ((file.exists())&&(file.open(QIODevice::ReadOnly)))
         {
-            count++;
-            file.readLine();
+            QTextStream in(&file);
+            while(!in.atEnd())
+            {
+                listOfParticipants.push_back(in.readLine());
+                //qDebug() << count;
+            }
+            file.close();
         }
-        file.close();
     }
-
-    if ((file.exists())&&(file.open(QIODevice::ReadOnly)))
-    {
-        listOfParticipants.resize(count);
-        //qDebug() << listOfParticipants;
-
-        QTextStream in(&file);
-        for(auto i = 0; i < count; i++)
-        {
-            //QString line = in.readLine();
-            listOfParticipants[i] = in.readLine();
-            //process_line(line);
-        }
-
-//        for(auto i = 0; i < count; i++)
-//        {
-//            // QTextStream::readLine
-//            listOfParticipants[i] = file.readLine();
-//            qDebug() << listOfParticipants[i];
-//        }
-        file.close();
-    }
-    return count;
+    return listOfParticipants.size();
 }
 
 QString File::getParticipantByIndex(int index)
@@ -50,8 +31,13 @@ QString File::getParticipantByIndex(int index)
 
 QString File::getRandomParticipant()
 {
-    srand(time(0));
-    rand();
-    return listOfParticipants[rand() % listOfParticipants.size()];
+    int random_index = -1;
+    if (!listOfParticipants.empty())
+    {
+        srand(time(0));
+        rand();
+        random_index = rand() % listOfParticipants.size();
+    }
+    return listOfParticipants.empty() ? "" : listOfParticipants[random_index];
 }
 

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QFile>
+#include <QTextStream>
 #include <QDebug>
 #include <ctime>
 

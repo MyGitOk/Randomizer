@@ -9,6 +9,9 @@ ApplicationWindow {
     height: 480
     title: qsTr("Randomizer")
 
+    //Component.onCompleted: console.log("Completed Running!")
+
+
     // массив QML, в который можно поместить что угодно, в C++ это будет либо QVariantMap, либо QVariantList
 //    property var objectsArray: []
 
@@ -19,7 +22,7 @@ ApplicationWindow {
             top: parent.top
             left: parent.left
             right: parent.right
-            bottom: parent.verticalCenter
+            bottom: parent
             margins: 5
         }
     }
@@ -28,7 +31,7 @@ ApplicationWindow {
         id: winner
         width: root.width / 3
         height: root.height / 10
-        //color: "lightgreen"
+        color: "transparent"
         border {
             color: "black"
             width: 1
@@ -66,7 +69,6 @@ ApplicationWindow {
             bottom: addOBjectButton.top
             margins: 5
         }
-
         onClicked: {
 //            objectsArray.push(factory.addParticipant("Mike"))
         }
@@ -83,14 +85,7 @@ ApplicationWindow {
         }
 
         onClicked: {
-
               winnerName.text = file.getRandomParticipant()
-//            var count_participants = file.countParticipants()
-//            for (var i = 0; i < count_participants; ++i)
-//            {
-//                objectsArray.push(factory.addParticipant(file.getParticipantByIndex(i)))
-//                //console.log("log_t")
-//            }
         }
     }
 
@@ -102,14 +97,11 @@ ApplicationWindow {
             bottom: parent.bottom
             margins: 5
         }
-
         onClicked: {
             var count_participants = file.countParticipants()
             textView.text = ""
             for (var i = 0; i < count_participants; ++i)
             {
-//                var str = objectsArray[i].number + " " + objectsArray[i].name
-//                textView.text += str
                 var str_2 = i + 1 + " " + file.getParticipantByIndex(i) + "\n"
                 textView.text += str_2
             }
