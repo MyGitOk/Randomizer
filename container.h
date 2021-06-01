@@ -5,7 +5,7 @@
 
 struct Participant : public QObject
 {
-    explicit Participant (QObject *parent = nullptr);
+    explicit Participant (QString _name, QObject *parent = nullptr);
 
     int m_number;
     QString m_name;
@@ -20,35 +20,6 @@ private:
 public:
     // А также вызвать в QML этот метод
     Q_INVOKABLE QString getFullInfo() const;
-};
-
-class Container : public QObject
-{
-    Q_OBJECT
-    // Сможем обращаться к полям из QML
-    Q_PROPERTY(int number READ number WRITE setNumber NOTIFY numberChanged)
-    Q_PROPERTY(QString name READ name WRITE setMessage NOTIFY messageChanged)
-
-public:
-    explicit Container(QObject *parent = nullptr);
-
-    // А также вызвать в QML этот метод
-    Q_INVOKABLE QString getFullInfo() const;
-
-    int number() const;
-    QString name() const;
-
-public slots:
-    void setNumber(int number);
-    void setMessage(QString message);
-
-signals:
-    void numberChanged(int number);
-    void messageChanged(QString message);
-
-private:
-    int m_number;
-    QString m_name;
 };
 
 #endif // CONTAINER_H

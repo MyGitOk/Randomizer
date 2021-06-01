@@ -8,12 +8,7 @@ ApplicationWindow {
     width: 640
     height: 480
     title: qsTr("Randomizer")
-
     //Component.onCompleted: console.log("Completed Running!")
-
-
-    // массив QML, в который можно поместить что угодно, в C++ это будет либо QVariantMap, либо QVariantList
-//    property var objectsArray: []
 
     Text {
         id: textView
@@ -61,21 +56,35 @@ ApplicationWindow {
     }
 
     Button {
-        id: addOBjectStructure
-        text: qsTr("Add Participant")
+        id: testButton
+        text: qsTr("test")
         anchors {
             right: parent.horizontalCenter
             left: parent.left
-            bottom: addOBjectButton.top
+            bottom: randomButton.top
             margins: 5
         }
         onClicked: {
-//            objectsArray.push(factory.addParticipant("Mike"))
+
         }
     }
 
     Button {
-        id: addOBjectButton
+        id: testButton2
+        text: qsTr("test2")
+        anchors {
+            right: parent.right
+            left: parent.horizontalCenter
+            bottom: printButton.top
+            margins: 5
+        }
+        onClicked: {
+
+        }
+    }
+
+    Button {
+        id: randomButton
         text: qsTr("Get random")
         anchors {
             right: parent.horizontalCenter
@@ -85,11 +94,12 @@ ApplicationWindow {
         }
 
         onClicked: {
-              winnerName.text = file.getRandomParticipant()
+            winnerName.text = file.getRandomParticipant()
         }
     }
 
     Button {
+        id: printButton
         text: qsTr("Print participants")
         anchors {
             right: parent.right
@@ -98,12 +108,11 @@ ApplicationWindow {
             margins: 5
         }
         onClicked: {
-            var count_participants = file.countParticipants()
+            var countParticipant = file.countParticipant()
             textView.text = ""
-            for (var i = 0; i < count_participants; ++i)
-            {
-                var str_2 = i + 1 + " " + file.getParticipantByIndex(i) + "\n"
-                textView.text += str_2
+            for (var i = 0; i < countParticipant; ++i){
+                var str = i + 1 + " " + file.getParticipantByIndex(i) + "\n"
+                textView.text += str
             }
         }
     }

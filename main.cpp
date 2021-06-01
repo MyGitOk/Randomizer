@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    Factory factory;
-        engine.rootContext()->setContextProperty("factory", &factory);
+//    Factory factory;
+//        engine.rootContext()->setContextProperty("factory", &factory);
     File file;
         engine.rootContext()->setContextProperty("file", &file);
 

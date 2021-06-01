@@ -8,7 +8,6 @@ CONFIG += c++11
 
 SOURCES += \
         container.cpp \
-        factory.cpp \
         file.cpp \
         main.cpp
 
@@ -27,5 +26,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     container.h \
-    factory.h \
     file.h

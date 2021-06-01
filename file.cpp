@@ -5,39 +5,38 @@ File::File(QObject *parent) : QObject(parent)
     file.setFileName("list_of_participants.txt");
 }
 
-int File::countParticipants() //возвращает количество строк из файла
+int File::countParticipant() //test method
 {
-    if (listOfParticipants.empty())
+    if (listOfParticipant.empty())
     {
+        //qDebug() << "StructList entered";
         if ((file.exists())&&(file.open(QIODevice::ReadOnly)))
         {
             QTextStream in(&file);
             while(!in.atEnd())
             {
-                listOfParticipants.push_back(in.readLine());
+                listOfParticipant.push_back(new Participant(in.readLine()));
                 //qDebug() << count;
             }
             file.close();
         }
     }
-    return listOfParticipants.size();
+    return listOfParticipant.size();
 }
 
 QString File::getParticipantByIndex(int index)
 {
-    //qDebug() << listOfParticipants[index];
-    return listOfParticipants[index];
+    return listOfParticipant[index]->m_name;
 }
 
 QString File::getRandomParticipant()
 {
     int random_index = -1;
-    if (!listOfParticipants.empty())
+    if (!listOfParticipant.empty())
     {
         srand(time(0));
         rand();
-        random_index = rand() % listOfParticipants.size();
+        random_index = rand() % listOfParticipant.size();
     }
-    return listOfParticipants.empty() ? "" : listOfParticipants[random_index];
+    return listOfParticipant.empty() ? "" : listOfParticipant[random_index]->m_name;
 }
-
